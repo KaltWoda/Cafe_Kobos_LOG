@@ -20,7 +20,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (response.ok) {
       alert("✅ Bienvenido " + result.user.username);
-      window.location.href = "/Public/dashboard.html";
+      window.location.href = "/public/dashboard.html";
     } else {
       alert("❌ " + result.error);
     }
