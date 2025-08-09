@@ -1,21 +1,31 @@
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
 
-  const res = await fetch("https://woobnujpscooracucphj.supabase.co", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
+  const username = document.getElementById("username").value.trim();
+  const contraseña = document.getElementById("contraseña").value.trim();
 
-  const data = await res.json();
-  console.log(data);
+  if (!username || !contraseña) {
+    alert("Por favor ingresa usuario y contraseña");
+    return;
+  }
 
-  if (data.token) {
-    alert("Login exitoso");
-  } else {
-    alert(data.error || "Error al iniciar sesión");
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, contraseña }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("✅ Bienvenido " + result.user.username);
+      window.location.href = "/Public/dashboard.html";
+    } else {
+      alert("❌ " + result.error);
+    }
+  } catch (error) {
+    alert("❌ Error de conexión");
+    console.error(error);
   }
 });
