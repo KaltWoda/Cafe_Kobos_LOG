@@ -1,11 +1,10 @@
 import pkg from "@supabase/supabase-js";
 const { createClient } = pkg;
 
-// Si existen variables de entorno, las usa. Si no, usa las locales (desarrollo)
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://woobnujpscooracucphj.supabase.co";
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "eyJhbGciOi...";
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -14,11 +13,16 @@ export default async function handler(req, res) {
 
   const { username, contraseña } = req.body;
 
+  if (!username || !contraseña) {
+    return res.status(400).json({ error: "Faltan datos obligatorios" });
+  }
+
+  // Consulta directa sin validación extra de email
   const { data, error } = await supabase
     .from("usuarios")
     .select("*")
     .eq("username", username)
-    .eq("contraseña", contraseña) // ⚠ no recomendado en producción
+    .eq("contraseña", contraseña)
     .single();
 
   if (error) return res.status(400).json({ error: error.message });
