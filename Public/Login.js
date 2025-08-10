@@ -1,12 +1,12 @@
-document.getElementById('loginForm').addEventListener('submit', async e => {
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
-  const res = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  const res = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
   });
 
@@ -18,6 +18,5 @@ document.getElementById('loginForm').addEventListener('submit', async e => {
   }
 
   alert(`Bienvenido ${data.user.nombre}`);
-  // Redirige al dashboard, por ejemplo:
-  window.location.href = '/public/dashboard.html';
+  window.location.href = "/public/dashboard.html";
 });
