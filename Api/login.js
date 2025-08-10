@@ -1,9 +1,9 @@
+import bcrypt from "bcryptjs";
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Método no permitido" });
   }
-
-  console.log("Request body:", req.body);
 
   const { username, password } = req.body;
 
@@ -11,21 +11,25 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Faltan datos obligatorios" });
   }
 
-  const { data, error } = await supabase
+  // Buscar usuario por username
+  const { data: user, error } = await supabase
     .from("usuarios")
     .select("*")
     .eq("username", username)
-    .eq("password", password)
     .single();
 
-  if (error) {
-    console.error("Error en supabase:", error);
-    return res.status(400).json({ error: error.message });
-  }
-
-  if (!data) {
+  if (error || !user) {
     return res.status(401).json({ error: "Usuario o contraseña incorrectos" });
   }
 
-  res.status(200).json({ message: "Login exitoso", user: data });
+  // Comparar password con hash
+  const validPassword = await bcrypt.compare(password, user.password);
+  if (!validPassword) {
+    return res.status(401).json({ error: "Usuario o contraseña incorrectos" });
+  }
+
+  // Excluir password de la respuesta
+  const { password: _, ...userData } = user;
+
+  res.status(200).json({ message: "Login exitoso", user: userData });
 }
