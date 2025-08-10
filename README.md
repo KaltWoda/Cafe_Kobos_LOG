@@ -8,7 +8,7 @@ Este proyecto usa Next.js para frontend y API routes, y Supabase para base de da
 - `npm run build` - Genera build para producción
 - `npm start` - Corre la app en modo producción
 
-## Variables de entorno
+## Variables de entornohh
 
 Debes crear un archivo `.env.local` con tus credenciales de Supabase:
 
