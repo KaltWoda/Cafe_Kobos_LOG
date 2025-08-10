@@ -1,5 +1,7 @@
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+    console.log("Submit capturado");
+
 
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
