@@ -18,5 +18,5 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   }
 
   alert(`Bienvenido ${data.user.nombre}`);
-  window.location.href = "/public/dashboard.html";
+  window.location.href = "/dashboard.html";
 });
