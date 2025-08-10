@@ -1,35 +1,40 @@
-import bcrypt from "bcryptjs";
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Método no permitido" });
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ error: "Faltan datos obligatorios" });
+    return res.status(400).json({ error: 'Faltan username o password' });
   }
 
-  // Buscar usuario por username
+  // Buscar usuario en la tabla
   const { data: user, error } = await supabase
-    .from("usuarios")
-    .select("*")
-    .eq("username", username)
+    .from('usuarios')
+    .select('id, nombre, username, password')
+    .eq('username', username)
     .single();
 
   if (error || !user) {
-    return res.status(401).json({ error: "Usuario o contraseña incorrectos" });
+    return res.status(401).json({ error: 'Usuario no encontrado' });
   }
 
-  // Comparar password con hash
-  const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) {
-    return res.status(401).json({ error: "Usuario o contraseña incorrectos" });
+  // Compara contraseña (texto plano)
+  if (user.password !== password) {
+    return res.status(401).json({ error: 'Contraseña incorrecta' });
   }
 
-  // Excluir password de la respuesta
+  // Login correcto, devuelve usuario sin password
   const { password: _, ...userData } = user;
 
-  res.status(200).json({ message: "Login exitoso", user: userData });
+  res.status(200).json({ user: userData });
 }
