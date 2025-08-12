@@ -1,80 +1,67 @@
 :root {
-  /* Paleta marrón */
-  --brown-dark: #4b2e2a;     /* marrón oscuro */
-  --brown-medium: #7a503f;   /* marrón medio */
-  --brown-light: #cbb39a;    /* marrón claro */
-  --cream: #f7efe6;          /* fondo crema */
-  --glass: rgba(75,46,42,0.18); /* overlay translúcido */
+  --brown-dark: #4b2e2a;
+  --brown-medium: #7a503f;
+  --brown-light: #cbb39a;
+  --cream: #f7efe6;
 }
 
 body {
-  background: linear-gradient(180deg, var(--cream), #efe7dd);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  /* Fondo con imagen */
+  background-image: url("https://picsum.photos/1600/900?blur=2"); /* Cambia la URL */
+  background-size: cover;
+  background-position: center;
 }
 
-/* Contenedor base de la imagen */
-.brown-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(0,0,0,0.02));
-  border-radius: 16px;
-  padding: 14px;
+/* Caja del login */
+.box {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  padding: 30px 25px;
+  width: 300px;
+  box-shadow: 0 10px 25px rgba(75, 46, 42, 0.25);
   border: 2px solid var(--brown-medium);
-  box-shadow:
-    0 10px 25px rgba(75,46,42,0.14),
-    inset 0 1px 0 rgba(255,255,255,0.25);
-  max-width: 420px;
+  text-align: center;
 }
 
-/* Variante con marco más oscuro */
-.brown-frame {
-  background: linear-gradient(180deg, var(--brown-light), var(--brown-medium));
-  padding: 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.06);
+h2 {
+  color: var(--brown-dark);
+  margin-bottom: 20px;
 }
 
-/* Imagen responsiva */
-.brown-card img {
-  display: block;
+input {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
-  object-fit: cover;
-  transition: transform .35s ease, box-shadow .35s ease;
-  box-shadow: 0 6px 18px rgba(75,46,42,0.18);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--brown-light);
+  border-radius: 6px;
+  font-size: 14px;
 }
 
-/* Hover con zoom */
-.brown-card:hover img {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 18px 40px rgba(75,46,42,0.28);
-}
-
-/* Overlay degradado */
-.image-wrap {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-}
-.image-wrap::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 40%, var(--glass) 100%);
-  pointer-events: none;
-  transition: background .3s ease;
-}
-.brown-card:hover .image-wrap::after {
-  background: linear-gradient(180deg, rgba(75,46,42,0.03) 30%, rgba(75,46,42,0.26) 100%);
-}
-
-/* Etiqueta */
-.label {
-  display: inline-block;
-  padding: 6px 10px;
-  background: var(--brown-dark);
+button {
+  width: 100%;
+  padding: 10px;
+  background: var(--brown-medium);
   color: var(--cream);
-  font-weight: 600;
-  font-size: 0.9rem;
-  border-radius: 999px;
-  box-shadow: 0 4px 10px rgba(75,46,42,0.12);
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: var(--brown-dark);
+}
+
+#mensaje {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--brown-dark);
 }

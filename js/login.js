@@ -1,11 +1,11 @@
 async function login() {
-  const email = document.getElementById("email").value.trim();
+  const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value.trim();
 
   const { data, error } = await supabaseClient
     .from("usuarios")
     .select("*")
-    .eq("email", email)
+    .eq("username", username)
     .eq("password", password)
     .single();
 
