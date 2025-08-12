@@ -27,7 +27,7 @@ body {
   width: 300px;
   box-shadow: 0 10px 25px rgba(75, 46, 42, 0.25);
   border: 2px solid var(--brown-medium);
-  text-align: center;
+  text-align: center; /* Centra el contenido de la caja */
 }
 
 h2 {
@@ -35,13 +35,11 @@ h2 {
   margin-bottom: 20px;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid var(--brown-light);
-  border-radius: 6px;
-  font-size: 14px;
+.box input {
+  display: block;
+  margin: 0 auto 15px; /* Centra horizontalmente */
+  text-align: center;  /* Texto centrado dentro del input */
+  width: 80%;          /* Más estrecho para que se note el centrado */
 }
 
 button {
