@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
 
   /* Fondo con imagen */
-  background-image: url("https://picsum.photos/1600/900?blur=2"); /* Cambia la URL */
+  background-image: url ("/loginfondo.jpg"); /* Cambia la URL */
   background-size: cover;
   background-position: center;
 }
