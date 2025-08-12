@@ -3,7 +3,7 @@ async function login() {
   const password = document.getElementById("password").value.trim();
 
   const { data, error } = await supabaseClient
-    .from("usuarios")
+    .from("Usuarios")
     .select("*")
     .eq("username", username)
     .eq("password", password)
