@@ -1,38 +1,80 @@
+:root {
+  /* Paleta marrón */
+  --brown-dark: #4b2e2a;     /* marrón oscuro */
+  --brown-medium: #7a503f;   /* marrón medio */
+  --brown-light: #cbb39a;    /* marrón claro */
+  --cream: #f7efe6;          /* fondo crema */
+  --glass: rgba(75,46,42,0.18); /* overlay translúcido */
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background: linear-gradient(180deg, var(--cream), #efe7dd);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-.box {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  width: 300px;
+/* Contenedor base de la imagen */
+.brown-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(0,0,0,0.02));
+  border-radius: 16px;
+  padding: 14px;
+  border: 2px solid var(--brown-medium);
+  box-shadow:
+    0 10px 25px rgba(75,46,42,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+  max-width: 420px;
 }
 
-input, button {
+/* Variante con marco más oscuro */
+.brown-frame {
+  background: linear-gradient(180deg, var(--brown-light), var(--brown-medium));
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Imagen responsiva */
+.brown-card img {
+  display: block;
   width: 100%;
-  padding: 10px;
-  margin: 8px 0;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform .35s ease, box-shadow .35s ease;
+  box-shadow: 0 6px 18px rgba(75,46,42,0.18);
 }
 
-button {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
+/* Hover con zoom */
+.brown-card:hover img {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(75,46,42,0.28);
 }
 
-button:hover {
-  background: #45a049;
+/* Overlay degradado */
+.image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, var(--glass) 100%);
+  pointer-events: none;
+  transition: background .3s ease;
+}
+.brown-card:hover .image-wrap::after {
+  background: linear-gradient(180deg, rgba(75,46,42,0.03) 30%, rgba(75,46,42,0.26) 100%);
 }
 
-#mensaje {
-  font-weight: bold;
-  margin-top: 10px;
+/* Etiqueta */
+.label {
+  display: inline-block;
+  padding: 6px 10px;
+  background: var(--brown-dark);
+  color: var(--cream);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(75,46,42,0.12);
 }
